@@ -1,4 +1,6 @@
 package com.button.model;
 
-public interface ProductListRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface ProductListRepository extends CrudRepository<ProductList, Integer> {
 }
