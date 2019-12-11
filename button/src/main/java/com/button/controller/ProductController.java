@@ -32,4 +32,10 @@ public class ProductController {
     Optional<Product> getProductById(@PathVariable Integer id) {
         return productRepository.findById(id);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public @ResponseBody
+    void deleteProductFromListById(@PathVariable Integer id) {
+        productRepository.deleteById(id);
+    }
 }
