@@ -1,4 +1,4 @@
-use buttondb;
+
 
 -- Инициализация таблицы product
 insert into product (name) values ('груша');
