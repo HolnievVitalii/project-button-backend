@@ -21,31 +21,11 @@
     <div class="container">
         <div class="row py-2">
             <div class="col-12">
-                <a class="btn btn-primary" th:href="@{/new_product_list}">Добавить список</a>
+                <a class="btn btn-primary" th:href="@{/}">Назад</a>
             </div>
 
             <div class="col-12">
-                <table class="table table-bordered my-2">
-                    <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Название</th>
-                        <th scope="col">Пользователь</th>
-                        <th scope="col">Действия</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="list : ${productLists}">
-                        <th scope="row" th:text="${list.id}"></th>
-                        <td th:text="${list.name}"></td>
-                        <td>-</td>
-                        <td>
-                            <a class="btn btn-success" th:href="@{/product_list/{listId} (listId=${list.id})}"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-danger" href="#"><i class="far fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+
             </div>
         </div>
     </div>
