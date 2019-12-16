@@ -18,40 +18,40 @@
             <a class="btn btn-outline-success my-2 my-sm-0" th:href="@{/register}">Register</a>
         </form>
     </nav>
-    <div class="container">
-        <div class="row py-2">
-            <div class="col-12">
-                <a class="btn btn-primary" th:href="@{/product_list/new}">Добавить продукт</a>
-            </div>
+<!--    <div class="container">-->
+<!--        <div class="row py-2">-->
+<!--            <div class="col-12">-->
+<!--                <a class="btn btn-primary" th:href="@{/product_list/new}">Добавить продукт</a>-->
+<!--            </div>-->
 
-            <div class="col-12">
-                <table class="table table-bordered my-2">
-                    <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Название продукта</th>
-                        <th scope="col">Количество</th>
-                        <th scope="col">Ед.изм.</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="list : ${productLists}">
-                        <th scope="row" th:text="${list.id}"></th>
-                        <td>
-                            <a th:href="@{/list_products/{listId} (listId=${list.id})}">
-                                <span th:text="${list.name}"></span>
-                            </a>
-                        </td>
-                        <td>-</td>
-                        <td>
-                            <a class="btn btn-success" th:href="@{/product_list/{listId} (listId=${list.id})}"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-danger" th:href="@{/product_list/delete/{listId} (listId=${list.id})}"><i class="far fa-trash-alt"></i></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+<!--            <div class="col-12">-->
+<!--                <table class="table table-bordered my-2">-->
+<!--                    <thead>-->
+<!--                    <tr>-->
+<!--                        <th scope="col">Id</th>-->
+<!--                        <th scope="col">Название продукта</th>-->
+<!--                        <th scope="col">Количество</th>-->
+<!--                        <th scope="col">Ед.изм.</th>-->
+<!--                    </tr>-->
+<!--                    </thead>-->
+<!--                    <tbody>-->
+<!--                    <tr th:each="list : ${productLists}">-->
+<!--                        <th scope="row" th:text="${list.id}"></th>-->
+<!--                        <td>-->
+<!--                            <a th:href="@{/list_products/{listId} (listId=${list.id})}">-->
+<!--                                <span th:text="${list.name}"></span>-->
+<!--                            </a>-->
+<!--                        </td>-->
+<!--                        <td>-</td>-->
+<!--                        <td>-->
+<!--                            <a class="btn btn-success" th:href="@{/product_list/{listId} (listId=${list.id})}"><i class="fas fa-edit"></i></a>-->
+<!--                            <a class="btn btn-danger" th:href="@{/product_list/delete/{listId} (listId=${list.id})}"><i class="far fa-trash-alt"></i></a>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
