@@ -4,10 +4,10 @@ import com.button.model.ProductList;
 import com.button.model.ProductListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/product_list")
@@ -16,8 +16,15 @@ public class ProductListPageController {
     ProductListRepository productListRepository;
 
     @GetMapping("/new")
-    public String addNewProductListPage() {
+    public String addNewProductListPage(Model model) {
+        model.addAttribute("product_list", new ProductList());
         return "new_product_list";
+    }
+
+    @PostMapping("/new")
+    public String addNewProductList(@ModelAttribute("product_list") @Valid ProductList productList) {
+        productListRepository.save(productList);
+        return "redirect:/index";
     }
 
     @GetMapping("/delete/{id}")
