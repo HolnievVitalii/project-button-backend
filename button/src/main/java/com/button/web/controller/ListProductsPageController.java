@@ -21,7 +21,6 @@ public class ListProductsPageController {
 
     @GetMapping("/{list_id}")
     public String ListProductsPage(Model model, @PathVariable("list_id") Integer listId) {
-//        Iterable<ProductProperty> listProducts = productPropertyRepository.findAllById(Arrays.asList(id));
         Iterable<ProductProperty> listProducts = productPropertyRepository.findProductsByProductListId(listId);
         model.addAttribute("listProducts", listProducts);
         return "list_products";

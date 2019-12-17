@@ -9,11 +9,13 @@ public class ProductProperty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "product_id")
-    private Integer productId;
+    @OneToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
 
-    @Column(name = "product_list_id")
-    private Integer productListId;
+    @ManyToOne
+    @JoinColumn(name = "product_list_id", referencedColumnName = "id")
+    private ProductList productList;
 
     private Float quantity;
 
@@ -29,20 +31,20 @@ public class ProductProperty {
         this.id = id;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public Integer getProductListId() {
-        return productListId;
+    public ProductList getProductList() {
+        return productList;
     }
 
-    public void setProductListId(Integer productListId) {
-        this.productListId = productListId;
+    public void setProductList(ProductList productList) {
+        this.productList = productList;
     }
 
     public Float getQuantity() {
@@ -67,5 +69,10 @@ public class ProductProperty {
 
     public void setUnits(String units) {
         this.units = units;
+    }
+
+    public String toString() {
+        return String.format("ProductProperty: %d %s %s %f %b %s",
+                this.id, this.product.getName(), this.productList.getName(), this.quantity, this.state, this.units);
     }
 }
