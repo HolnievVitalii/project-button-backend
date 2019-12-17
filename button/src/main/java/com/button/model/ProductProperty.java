@@ -23,6 +23,8 @@ public class ProductProperty {
 
     private String units;
 
+    public ProductProperty() {}
+
     public Integer getId() {
         return id;
     }
