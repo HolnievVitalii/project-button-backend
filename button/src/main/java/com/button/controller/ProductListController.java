@@ -46,6 +46,8 @@ public class ProductListController {
     String renameExistingList(@PathVariable Integer id, @RequestParam String name) {
         ProductList productList = productListRepository.findById(id).get();
         productList.setName(name);
+        productListRepository.save(productList);
+
         return "existing list under id = " + id + " renamed with a new name: " + name;
     }
 }
