@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,22 +23,13 @@ public class ProductPropertyController {
     private ProductRepository productRepository;
 
     @PostMapping(path = "/add")
-    public ResponseEntity addNewProductProperty(@RequestBody ProductProperty productProperty) {
+    public ResponseEntity addNewProductProperty(@Valid @RequestBody ProductProperty productProperty) {
+
         if (productProperty.getProduct() == null || productProperty.getProductList() == null) {
             return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
         }
 
-//        try {
-//        Integer productId = productProperty.getProduct().getId();
-//        if (productRepository.findById(productId).get() == null) {
-//            return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
-//        }
-
-
-        System.out.println(productProperty);
-
         productPropertyRepository.save(productProperty);
-
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
