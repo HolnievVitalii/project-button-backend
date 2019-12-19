@@ -1,8 +1,6 @@
 package com.button.web.controller;
 
-import com.button.model.ProductList;
-import com.button.model.ProductProperty;
-import com.button.model.ProductPropertyRepository;
+import com.button.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +17,25 @@ public class ListProductsPageController {
     @Autowired
     private ProductPropertyRepository productPropertyRepository;
 
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private ProductListRepository productListRepository;
+
     @GetMapping("/{list_id}")
-    public String ListProductsPage(Model model, @PathVariable("list_id") Integer listId) {
+    public String listProductsPage(Model model, @PathVariable("list_id") Integer listId) {
         Iterable<ProductProperty> listProducts = productPropertyRepository.findProductsByProductListId(listId);
+        model.addAttribute("list_id", listId);
         model.addAttribute("listProducts", listProducts);
         return "list_products";
+    }
+
+    @GetMapping("/{list_id}/add_product")
+    public String addProductPage(Model model, @PathVariable("list_id") Integer listId) {
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("product", new Product());
+        model.addAttribute("list", listId);
+        return "add_product";
     }
 }
