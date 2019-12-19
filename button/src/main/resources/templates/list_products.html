@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row py-2">
             <div class="col-12">
-                <a class="btn btn-primary" th:href="@{/list_products/add_product}">Добавить продукт</a>
+                <a class="btn btn-primary" th:href="@{/list_products/{listId}/add_product (listId = ${list_id})}">Добавить продукт</a>
             </div>
 
             <div class="col-12">
