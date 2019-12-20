@@ -2,11 +2,10 @@ package com.button.web.controller;
 
 import com.button.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,5 +36,23 @@ public class ListProductsPageController {
         model.addAttribute("new_product", new Product());
         model.addAttribute("list", listId);
         return "add_product";
+    }
+
+    @PostMapping("/{list_id}/add")
+    public String addProductToList(@PathVariable("list_id") Integer listId,
+                                   @ModelAttribute("new_product") Product newProduct)
+    {
+
+        Product product = productRepository.findProductByName(newProduct.getName());
+        if (product == null) {
+            product = productRepository.save(newProduct);
+        }
+
+        ProductProperty productProperty = new ProductProperty();
+        productProperty.setProductId(product.getId());
+        productProperty.setProductListId(listId);
+        productPropertyRepository.save(productProperty);
+
+        return "redirect:/list_products/" + listId;
     }
 }

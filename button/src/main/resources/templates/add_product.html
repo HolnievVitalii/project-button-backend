@@ -31,7 +31,7 @@
                         <label>Название товара</label>
                         <input type="text" class="form-control" th:field="*{name}" placeholder="Введите название товара"
 -                               id="product_name" list="product_list">
-                        <datalist id="product_list" >
+                        <datalist id="product_list">
                             <option th:each="product : ${products}" th:value="${product.name}"></option>
                         </datalist>
 
