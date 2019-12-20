@@ -34,7 +34,7 @@ public class ListProductsPageController {
     @GetMapping("/{list_id}/add_product")
     public String addProductPage(Model model, @PathVariable("list_id") Integer listId) {
         model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("product", new Product());
+        model.addAttribute("new_product", new Product());
         model.addAttribute("list", listId);
         return "add_product";
     }
