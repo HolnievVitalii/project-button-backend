@@ -12,11 +12,15 @@ public class User {
 
     private String login;
 
+    private String pass;
+
     private String name;
 
     private String surname;
 
     private boolean disabled;
+
+    public User() {}
 
     public Integer getId() {
         return id;
@@ -32,6 +36,14 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getName() {

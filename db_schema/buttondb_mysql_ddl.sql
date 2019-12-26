@@ -31,13 +31,14 @@ CREATE TABLE `product_property` (
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(20) DEFAULT NULL,
+  `pass` varchar(45) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
   `surname` varchar(20) DEFAULT NULL,
   `disabled` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `login_UNIQUE` (`login`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
 
 CREATE TABLE `users_product_list` (
   `product_list_id` int(11) NOT NULL,
