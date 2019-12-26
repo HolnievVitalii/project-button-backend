@@ -1,14 +1,14 @@
 package com.button.web.controller;
 
-import com.button.model.*;
+import com.button.model.entity.Product;
+import com.button.model.entity.ProductProperty;
+import com.button.model.repo.ProductListRepository;
+import com.button.model.repo.ProductPropertyRepository;
+import com.button.model.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Controller
 @RequestMapping("/list_products")

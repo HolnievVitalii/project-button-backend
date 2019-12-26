@@ -1,5 +1,6 @@
-package com.button.model;
+package com.button.model.repo;
 
+import com.button.model.entity.Product;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

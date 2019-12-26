@@ -1,17 +1,14 @@
 package com.button.controller;
 
-import com.button.model.Product;
-import com.button.model.ProductProperty;
-import com.button.model.ProductPropertyRepository;
-import com.button.model.ProductRepository;
+import com.button.model.entity.ProductProperty;
+import com.button.model.repo.ProductPropertyRepository;
+import com.button.model.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping(path = "/product_property")

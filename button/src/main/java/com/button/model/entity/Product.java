@@ -1,4 +1,4 @@
-package com.button.model;
+package com.button.model.entity;
 
 import javax.persistence.*;
 
