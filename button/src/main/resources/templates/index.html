@@ -14,12 +14,12 @@
 <body>
     <nav class="navbar navbar-light bg-light justify-content-between">
         <a class="navbar-brand h1" th:href="@{/}">ButtoH</a>
-        <span th:text="${user.surname} + ' ' + ${user.name}">-</span>
+        <span sec:authorize="isAuthenticated()" th:text="${user.surname} + ' ' + ${user.name}">-</span>
 
         <form class="form-inline">
-            <a class="btn btn-outline-success my-2 my-sm-0" th:href="@{/login}">Login</a>
-            <a class="btn btn-outline-success my-2 my-sm-0" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
-            <a class="btn btn-outline-success my-2 my-sm-0" th:href="@{/register}">Register</a>
+            <a class="btn btn-outline-success my-2 my-sm-0" sec:authorize="isAnonymous()" th:href="@{/login}">Войти</a>
+            <a class="btn btn-outline-success my-2 my-sm-0" sec:authorize="isAuthenticated()" th:href="@{/logout}">Выйти</a>
+            <a class="btn btn-outline-success my-2 my-sm-0" sec:authorize="isAnonymous()" th:href="@{/register}">Зарегистрироваться</a>
         </form>
     </nav>
     <div class="container">
