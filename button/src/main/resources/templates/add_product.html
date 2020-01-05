@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extas/spring-security">
+
+<head th:replace="fragments/header::head_style"></head>
+<body>
+    <div th:replace="fragments/header::navbar"></div>
+
+    <div class="container">
+        <div class="row py-2">
+            <div class="col-12">
+                <a class="btn btn-primary" th:href="@{/list_products/{listId} (listId=${list_id})}">Назад</a>
+            </div>
+
+            <div class="col-12" onfocus="hideList()">
+                <form th:action="@{/list_products/{listId}/add (listId=${list_id})}" method="post"
+                      th:object="${new_product}" autocomplete="off">
+                    <div class="form-group">
+                        <label>Название товара</label>
+                        <input type="text" class="form-control" th:field="*{name}" placeholder="Введите название товара"
+-                               id="product_name" list="product_list">
+                        <datalist id="product_list">
+                            <option th:each="product : ${products}" th:value="${product.name}"></option>
+                        </datalist>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

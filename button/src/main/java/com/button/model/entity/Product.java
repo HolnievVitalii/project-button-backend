@@ -1,11 +1,11 @@
-package com.button.model;
+package com.button.model.entity;
 
 import javax.persistence.*;
 
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column

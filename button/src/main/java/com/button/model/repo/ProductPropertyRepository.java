@@ -1,11 +1,9 @@
-package com.button.model;
+package com.button.model.repo;
 
-import org.hibernate.validator.constraints.ParameterScriptAssert;
+import com.button.model.entity.ProductProperty;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 public interface ProductPropertyRepository extends CrudRepository<ProductProperty, Integer> {
     @Query(

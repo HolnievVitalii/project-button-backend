@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extas/spring-security">
+
+<head th:replace="fragments/header::head_style"></head>
+<body>
+    <div th:replace="fragments/header::navbar"></div>
+
+    <div class="container">
+        <div class="row py-2">
+            <div th:if="${param.error}">
+                Введено неправильное имя пользователя или пароль. Попробуйте ещё раз.
+            </div>
+            <div class="col-12">
+                <form th:action="@{/login}" method="post">
+                    <div class="form-group">
+                        <label for="username">Логин пользователя</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Введите логин">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <a class="px-3" th:href="@{/register}">Register</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

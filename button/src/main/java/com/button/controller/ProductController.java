@@ -1,7 +1,7 @@
 package com.button.controller;
 
-import com.button.model.Product;
-import com.button.model.ProductRepository;
+import com.button.model.entity.Product;
+import com.button.model.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
