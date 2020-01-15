@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping(value = {"/", "index"})
 public class IndexController {
@@ -26,14 +28,11 @@ public class IndexController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = new User();
-        Iterable<ProductList> productLists;
+        Iterable<ProductList> productLists = new ArrayList<>();
 
         if (!auth.getName().equals("anonymousUser")) {
             user = userRepository.findUserByLogin(auth.getName());
             productLists = productListRepository.findProductListByUserId(user.getId());
-        }
-        else {
-            productLists = productListRepository.findAll();
         }
 
         model.addAttribute("productLists", productLists);
