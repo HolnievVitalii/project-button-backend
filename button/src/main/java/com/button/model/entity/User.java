@@ -1,6 +1,8 @@
 package com.button.model.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="users")
@@ -19,6 +21,13 @@ public class User {
     private String surname;
 
     private boolean disabled;
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Users_ProductList> productLists = new ArrayList<>();
 
     public User() {}
 
@@ -68,5 +77,24 @@ public class User {
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
+    }
+
+    public List<Users_ProductList> getProductLists() {
+        return productLists;
+    }
+
+    public void addProductList(ProductList productList) {
+        Users_ProductList users_productList = new Users_ProductList(this, productList);
+        productLists.add(users_productList);
+        productList.getProductListUsers().add(users_productList);
+    }
+
+    public void removeProductList(ProductList productList) {
+        Users_ProductList users_productList = new Users_ProductList(this, productList);
+        productList.getProductListUsers().remove(this);
+        productLists.remove(productList);
+
+        users_productList.setUser(null);
+        users_productList.setProductList(null);
     }
 }
