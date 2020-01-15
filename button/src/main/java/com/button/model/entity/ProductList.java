@@ -1,6 +1,10 @@
 package com.button.model.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "product_list")
@@ -10,6 +14,18 @@ public class ProductList {
     private Integer id;
 
     private String name;
+
+    @OneToMany(
+            mappedBy = "productList",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Users_ProductList> productListUsers = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "productList",
+            cascade = CascadeType.ALL)
+    private List<ProductProperty> productProperties = new ArrayList<>();
 
     public ProductList() {}
 
@@ -27,5 +43,24 @@ public class ProductList {
 
     public String getName() {
         return name;
+    }
+
+    public void addUser(User user) {
+        Users_ProductList users_productList = new Users_ProductList(user, this);
+        productListUsers.add(users_productList);
+        user.getProductLists().add(users_productList);
+    }
+
+    public void removeUser(User user) {
+        Users_ProductList users_productList = new Users_ProductList(user, this);
+        productListUsers.remove(users_productList);
+        user.getProductLists().remove(users_productList);
+
+        users_productList.setUser(null);
+        users_productList.setProductList(null);
+    }
+
+    public List<Users_ProductList> getProductListUsers() {
+        return productListUsers;
     }
 }
