@@ -35,6 +35,7 @@
                         <td>
                             <a class="btn btn-success" th:href="@{/product_list/{listId} (listId=${list.id})}"><i class="fas fa-edit"></i></a>
                             <a class="btn btn-danger" th:href="@{/product_list/delete/{listId} (listId=${list.id})}"><i class="far fa-trash-alt"></i></a>
+                            <a class="btn btn-light" th:href="@{/product_list/share/{listId} (listId=${list.id})}"><i class="fa fa-share-alt"></i></a>
                         </td>
                     </tr>
                     </tbody>
