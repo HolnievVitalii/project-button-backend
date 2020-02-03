@@ -8,14 +8,22 @@ import java.util.Objects;
 @Table(name = "users_product_list")
 public class Users_ProductList implements Serializable {
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @Id
+//    @Column(name = "user_id")
+    private Integer userId;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "product_list_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+//    @Id
+//    @Column(name = "product_list_id")
+    private Integer productListId;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "product_list_id", referencedColumnName = "id")
     private ProductList productList;
 
     public Users_ProductList() {}
@@ -25,12 +33,28 @@ public class Users_ProductList implements Serializable {
         productList = _productList;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Integer getProductListId() {
+        return productListId;
+    }
+
+    public void setProductListId(Integer productListId) {
+        this.productListId = productListId;
     }
 
     public ProductList getProductList() {

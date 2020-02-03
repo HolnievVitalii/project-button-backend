@@ -47,8 +47,15 @@ public class ProductList {
 
     public void addUser(User user) {
         Users_ProductList users_productList = new Users_ProductList(user, this);
+        users_productList.setProductListId(this.id);
+        users_productList.setUserId(user.getId());
         productListUsers.add(users_productList);
         user.getProductLists().add(users_productList);
+
+        for( Users_ProductList usr : productListUsers) {
+            User usr1 = usr.getUser();
+            System.out.println(usr1.getId() + " " + usr1.getLogin() + " " + usr1.getName() + " " + usr1.getSurname());
+        }
     }
 
     public void removeUser(User user) {
