@@ -10,7 +10,7 @@ public class Users_ProductList implements Serializable {
 
 //    @Id
 //    @Column(name = "user_id")
-    private Integer userId;
+//    private Integer userId;
 
     @Id
     @ManyToOne
@@ -19,7 +19,7 @@ public class Users_ProductList implements Serializable {
 
 //    @Id
 //    @Column(name = "product_list_id")
-    private Integer productListId;
+//    private Integer productListId;
 
     @Id
     @ManyToOne
@@ -33,13 +33,13 @@ public class Users_ProductList implements Serializable {
         productList = _productList;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+//    public Integer getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Integer userId) {
+//        this.userId = userId;
+//    }
 
     public User getUser() {
         return user;
@@ -49,13 +49,13 @@ public class Users_ProductList implements Serializable {
         this.user = user;
     }
 
-    public Integer getProductListId() {
-        return productListId;
-    }
-
-    public void setProductListId(Integer productListId) {
-        this.productListId = productListId;
-    }
+//    public Integer getProductListId() {
+//        return productListId;
+//    }
+//
+//    public void setProductListId(Integer productListId) {
+//        this.productListId = productListId;
+//    }
 
     public ProductList getProductList() {
         return productList;

@@ -47,8 +47,8 @@ public class ProductList {
 
     public void addUser(User user) {
         Users_ProductList users_productList = new Users_ProductList(user, this);
-        users_productList.setProductListId(this.id);
-        users_productList.setUserId(user.getId());
+//        users_productList.setProductListId(this.id);
+//        users_productList.setUserId(user.getId());
         productListUsers.add(users_productList);
         user.getProductLists().add(users_productList);
 
