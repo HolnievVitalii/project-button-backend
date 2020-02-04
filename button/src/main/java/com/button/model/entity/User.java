@@ -2,7 +2,9 @@ package com.button.model.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -22,12 +24,12 @@ public class User {
 
     private boolean disabled;
 
-    @OneToMany(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+    @ManyToMany(
+            mappedBy = "users",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER
     )
-    private List<Users_ProductList> productLists = new ArrayList<>();
+    private Set<ProductList> productLists = new HashSet<>();
 
     public User() {}
 
@@ -79,24 +81,23 @@ public class User {
         this.disabled = disabled;
     }
 
-    public List<Users_ProductList> getProductLists() {
+    public Set<ProductList> getProductLists() {
         return productLists;
     }
 
     public void addProductList(ProductList productList) {
-        Users_ProductList users_productList = new Users_ProductList(this, productList);
-//        users_productList.setProductListId(productList.getId());
-//        users_productList.setUserId(this.getId());
-        productLists.add(users_productList);
-        productList.getProductListUsers().add(users_productList);
+        productLists.add(productList);
+        productList.getUsers().add(this);
     }
 
     public void removeProductList(ProductList productList) {
-        Users_ProductList users_productList = new Users_ProductList(this, productList);
-        productList.getProductListUsers().remove(this);
         productLists.remove(productList);
 
-        users_productList.setUser(null);
-        users_productList.setProductList(null);
+//        Users_ProductList users_productList = new Users_ProductList(this, productList);
+//        productList.getProductListUsers().remove(this);
+//        productLists.remove(productList);
+//
+//        users_productList.setUser(null);
+//        users_productList.setProductList(null);
     }
 }

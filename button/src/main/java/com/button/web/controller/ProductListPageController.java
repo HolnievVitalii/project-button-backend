@@ -1,8 +1,8 @@
 package com.button.web.controller;
 
+import com.button.model.entity.Product;
 import com.button.model.entity.ProductList;
 import com.button.model.entity.User;
-import com.button.model.entity.Users_ProductList;
 import com.button.model.repo.ProductListRepository;
 import com.button.model.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/product_list")
@@ -38,7 +36,7 @@ public class ProductListPageController {
 
         if (!auth.getName().equals("anonymousUser")) {
             User user = userRepository.findUserByLogin(auth.getName());
-            productList.addUser(user);
+            user.addProductList(productList);
             productListRepository.save(productList);
         }
 
@@ -47,20 +45,18 @@ public class ProductListPageController {
 
     @GetMapping("/delete/{id}")
     public String deleteProductListPage(@PathVariable Integer id) {
-        productListRepository.deleteById(id);
+//        productListRepository.deleteById(id);
+        ProductList productList = productListRepository.findById(id).get();
+        productListRepository.delete(productList);
         return "redirect:/index";
     }
 
     @GetMapping("/share/{productListId}")
     public String shareProductListPage(Model model, @PathVariable Integer productListId) {
         ProductList productList = productListRepository.findById(productListId).get();
-        List<Users_ProductList> users_productListList = productList.getProductListUsers();
-        List<User> userList = new ArrayList<>();
-        for (Users_ProductList upl: users_productListList) {
-            userList.add(upl.getUser());
-        }
+        Set<User> users = productList.getUsers();
 
-        model.addAttribute("userList", userList);
+        model.addAttribute("userList", users);
         model.addAttribute("productList", productList);
 
         User user = new User();
@@ -75,12 +71,22 @@ public class ProductListPageController {
 
         user = userRepository.findUserByLogin(user.getLogin());
         if (user != null) {
-            User user2 = userRepository.findUserByLogin(user.getLogin());
-            productList.addUser(user2);
-            System.out.println(user2.getId());
-            productListRepository.save(productList);
+//            user.addProductList(productList);
+            productList.addUser(user);
+            userRepository.save(user);
         }
 
+        return "redirect:/product_list/share/" + productListId;
+    }
+
+    @GetMapping("/share/{productListId}/delete/{userId}")
+    public String unshareProductListForUser(@PathVariable Integer productListId, @PathVariable Integer userId) {
+        ProductList productList = productListRepository.findById(productListId).get();
+        User user = userRepository.findById(userId).get();
+
+        productList.removeUser(user);
+        productListRepository.save(productList);
+        
         return "redirect:/product_list/share/" + productListId;
     }
 }
