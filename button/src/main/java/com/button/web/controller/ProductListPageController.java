@@ -1,6 +1,5 @@
 package com.button.web.controller;
 
-import com.button.model.entity.Product;
 import com.button.model.entity.ProductList;
 import com.button.model.entity.User;
 import com.button.model.repo.ProductListRepository;
@@ -71,7 +70,6 @@ public class ProductListPageController {
 
         user = userRepository.findUserByLogin(user.getLogin());
         if (user != null) {
-//            user.addProductList(productList);
             productList.addUser(user);
             userRepository.save(user);
         }
