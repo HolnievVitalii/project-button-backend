@@ -15,10 +15,9 @@
 
             <div class="col-12">
                 <form th:action="@{/product_list/share/{productListId} (productListId=${productList.id})}" method="post" th:object="${user}">
-<!--                      th:object="${user}">-->
                     <div class="form-group">
                         <label>Пользователь</label>
-                        <input type="text" class="form-control" th:field="${user.login}" placeholder="Введите логин пользователя">
+                        <input type="text" class="form-control" th:field="${user.login}" placeholder="Введите логин пользователя" autocomplete="off">
                         <button type="submit" class="btn btn-primary">Поделиться</button>
                     </div>
                 </form>

@@ -17,7 +17,7 @@
                 <form th:action="@{/product_list/new}" method="post" th:object="${product_list}">
                     <div class="form-group">
                         <label>Название списка</label>
-                        <input type="text" class="form-control" th:field="*{name}" placeholder="Введите название нового списка">
+                        <input type="text" class="form-control" th:field="*{name}" placeholder="Введите название нового списка" autocomplete="off">
                     </div>
                     <button type="submit" class="btn btn-primary">Создать</button>
                 </form>
