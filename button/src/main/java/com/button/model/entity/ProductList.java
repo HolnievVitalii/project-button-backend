@@ -1,7 +1,5 @@
 package com.button.model.entity;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;

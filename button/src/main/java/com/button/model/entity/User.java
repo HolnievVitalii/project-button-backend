@@ -92,12 +92,5 @@ public class User {
 
     public void removeProductList(ProductList productList) {
         productLists.remove(productList);
-
-//        Users_ProductList users_productList = new Users_ProductList(this, productList);
-//        productList.getProductListUsers().remove(this);
-//        productLists.remove(productList);
-//
-//        users_productList.setUser(null);
-//        users_productList.setProductList(null);
     }
 }
