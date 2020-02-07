@@ -1,10 +1,10 @@
 package com.button.model.entity;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "product_list")
@@ -15,12 +15,17 @@ public class ProductList {
 
     private String name;
 
-    @OneToMany(
-            mappedBy = "productList",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST
     )
-    private List<Users_ProductList> productListUsers = new ArrayList<>();
+    @JoinTable(
+            name = "users_product_list",
+            joinColumns = {@JoinColumn(name = "product_list_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<User> users = new HashSet<>();
 
     @OneToMany(
             mappedBy = "productList",
@@ -45,22 +50,16 @@ public class ProductList {
         return name;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
     public void addUser(User user) {
-        Users_ProductList users_productList = new Users_ProductList(user, this);
-        productListUsers.add(users_productList);
-        user.getProductLists().add(users_productList);
+        users.add(user);
+        user.getProductLists().add(this);
     }
 
     public void removeUser(User user) {
-        Users_ProductList users_productList = new Users_ProductList(user, this);
-        productListUsers.remove(users_productList);
-        user.getProductLists().remove(users_productList);
-
-        users_productList.setUser(null);
-        users_productList.setProductList(null);
-    }
-
-    public List<Users_ProductList> getProductListUsers() {
-        return productListUsers;
+        users.remove(user);
     }
 }

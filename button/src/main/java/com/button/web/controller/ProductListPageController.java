@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/product_list")
@@ -34,7 +35,7 @@ public class ProductListPageController {
 
         if (!auth.getName().equals("anonymousUser")) {
             User user = userRepository.findUserByLogin(auth.getName());
-            productList.addUser(user);
+            user.addProductList(productList);
             productListRepository.save(productList);
         }
 
@@ -43,7 +44,52 @@ public class ProductListPageController {
 
     @GetMapping("/delete/{id}")
     public String deleteProductListPage(@PathVariable Integer id) {
-        productListRepository.deleteById(id);
+        ProductList productList = productListRepository.findById(id).get();
+        Set<User> users = productList.getUsers();
+        for (User user : users) {
+            user.getProductLists().remove(productList);
+        }
+        userRepository.saveAll(users);
+        productListRepository.delete(productList);
+
         return "redirect:/index";
+    }
+
+    @GetMapping("/share/{productListId}")
+    public String shareProductListPage(Model model, @PathVariable Integer productListId) {
+        ProductList productList = productListRepository.findById(productListId).get();
+        Set<User> users = productList.getUsers();
+
+        model.addAttribute("userList", users);
+        model.addAttribute("productList", productList);
+
+        User user = new User();
+        model.addAttribute("user", user);
+
+        return "share";
+    }
+
+    @PostMapping("/share/{productListId}")
+    public String shareProductList(@ModelAttribute("user") User user, @PathVariable Integer productListId) {
+        ProductList productList = productListRepository.findById(productListId).get();
+
+        user = userRepository.findUserByLogin(user.getLogin());
+        if (user != null) {
+            productList.addUser(user);
+            userRepository.save(user);
+        }
+
+        return "redirect:/product_list/share/" + productListId;
+    }
+
+    @GetMapping("/share/{productListId}/delete/{userId}")
+    public String unshareProductListForUser(@PathVariable Integer productListId, @PathVariable Integer userId) {
+        ProductList productList = productListRepository.findById(productListId).get();
+        User user = userRepository.findById(userId).get();
+
+        productList.removeUser(user);
+        productListRepository.save(productList);
+        
+        return "redirect:/product_list/share/" + productListId;
     }
 }
