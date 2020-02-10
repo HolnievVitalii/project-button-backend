@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extas/spring-security">
+
+<head th:replace="fragments/header::head_style"></head>
+<body>
+    <div th:replace="fragments/header::navbar"></div>
+
+    <div class="container">
+        <div class="row py-2">
+            <div class="col-12">
+                <a class="btn btn-primary" th:href="@{/list_products/{listId} (listId=${list_id})}">Назад</a>
+            </div>
+
+            <div class="col-12">
+                <form th:action="@{/list_products/{listId}/edit/{productPropertyId} (listId=${list_id}, productPropertyId=${product_property.id})}" method="post"
+                      th:object="${product_property}" autocomplete="off">
+                    <div class="form-group">
+                        <h2 th:utext="${product_property.product.name}"></h2>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Количество</label>
+                        <input type="number" class="form-control" th:field="*{quantity}" placeholder="Введите количество товара" id="quantity">
+                    </div>
+                    <div class="form-group">
+                        <label for="units">Единицы измерения</label>
+                        <select class="form-control" id="units" th:field="*{units}">
+                            <option value="КИЛОГРАММ">кг</option>
+                            <option value="ГРАММ">г</option>
+                            <option value="ШТУКА">шт</option>
+                            <option value="ЛИТР">л</option>
+                            <option value="УПАКОВКА">упаковка</option>
+                        </select>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" th:field="*{state}" id="state">
+                        <label for="state">Куплено</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">OK</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

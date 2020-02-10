@@ -57,6 +57,38 @@ public class ListProductsPageController {
         return "redirect:/list_products/" + listId;
     }
 
+    @GetMapping("/{list_id}/edit/{product_property_id}")
+    public String openEditProductPropertyPage(Model model,
+                                              @PathVariable("list_id") Integer listId,
+                                              @PathVariable("product_property_id") Integer productPropertyId)
+    {
+        ProductProperty productProperty = productPropertyRepository.findById(productPropertyId).get();
+        model.addAttribute("list_id", listId);
+        model.addAttribute("product_property", productProperty);
+
+        return "edit_product_properties";
+    }
+
+    @PostMapping("/{list_id}/edit/{product_property_id}")
+    public String editProductProperty(@PathVariable("list_id") Integer listId,
+                                      @PathVariable("product_property_id") Integer productPropertyId,
+                                      @ModelAttribute("product_property") ProductProperty newProductProperty)
+    {
+        ProductProperty productProperty = productPropertyRepository.findById(productPropertyId).get();
+        if (productProperty != null) {
+            Float quantity = newProductProperty.getQuantity();
+            String units = newProductProperty.getUnits();
+            Boolean state = newProductProperty.getState();
+
+            productProperty.setQuantity(quantity);
+            productProperty.setUnits(units);
+            productProperty.setState(state);
+
+            productPropertyRepository.save(productProperty);
+        }
+        return "redirect:/list_products/" + listId;
+    }
+
     @GetMapping("/{list_id}/delete/{product_property_id}")
     public String deleteProductFromList(@PathVariable("list_id") Integer listId,
                                         @PathVariable("product_property_id") Integer productPropertyId)
