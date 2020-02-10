@@ -22,21 +22,24 @@
                         <th scope="col">Количество</th>
                         <th scope="col">Ед.изм.</th>
                         <th scope="col">Куплено</th>
+                        <th scope="col">Действия</th>
                     </tr>
                     </thead>
-                    <tbody>
                     <tr th:each="productProperty : ${listProducts}">
                         <td scope="row" th:text="${productProperty.id}"></td>
                         <td scope="row" th:text="${productProperty.product.name}"></td>
                         <td scope="row" th:text="${productProperty.quantity}"></td>
                         <td scope="row" th:text="${productProperty.units}"></td>
                         <td scope="row" th:text="${productProperty.state}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+
+                        <td scopt="row">
+                            <a class="btn btn-danger" th:href="@{/list_products/{listId}/delete/{productPropertyId} (listId=${list_id}, productPropertyId=${productProperty.id})}"><i class="far fa-trash-alt"></i></a>                </tr>
+                        </td>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
 </body>
 </html>

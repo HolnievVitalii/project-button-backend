@@ -1,6 +1,7 @@
 package com.button.web.controller;
 
 import com.button.model.entity.Product;
+import com.button.model.entity.ProductList;
 import com.button.model.entity.ProductProperty;
 import com.button.model.repo.ProductListRepository;
 import com.button.model.repo.ProductPropertyRepository;
@@ -53,6 +54,14 @@ public class ListProductsPageController {
         productProperty.setProductListId(listId);
         productPropertyRepository.save(productProperty);
 
+        return "redirect:/list_products/" + listId;
+    }
+
+    @GetMapping("/{list_id}/delete/{product_property_id}")
+    public String deleteProductFromList(@PathVariable("list_id") Integer listId,
+                                        @PathVariable("product_property_id") Integer productPropertyId)
+    {
+        productPropertyRepository.deleteById(productPropertyId);
         return "redirect:/list_products/" + listId;
     }
 }
