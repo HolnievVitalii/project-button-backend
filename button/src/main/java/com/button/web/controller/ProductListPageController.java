@@ -1,5 +1,6 @@
 package com.button.web.controller;
 
+import com.button.model.entity.Product;
 import com.button.model.entity.ProductList;
 import com.button.model.entity.User;
 import com.button.model.repo.ProductListRepository;
@@ -52,6 +53,28 @@ public class ProductListPageController {
         userRepository.saveAll(users);
         productListRepository.delete(productList);
 
+        return "redirect:/index";
+    }
+
+    @GetMapping("/rename/{id}")
+    public String renameProductListPage(Model model, @PathVariable Integer id) {
+        ProductList productList = productListRepository.findById(id).get();
+        model.addAttribute("product_list", productList);
+        return "rename_product_list";
+    }
+
+    @PostMapping("/rename/{id}")
+    public String renameProductList(@PathVariable Integer id,
+                                    @ModelAttribute("product_list") ProductList newProductList)
+    {
+        ProductList productList = productListRepository.findById(id).get();
+        String oldName = productList.getName();
+        String newName = newProductList.getName();
+
+        if (newName != null && newName.length() != 0 && !newName.equals(oldName)) {
+            productList.setName(newProductList.getName());
+            productListRepository.save(productList);
+        }
         return "redirect:/index";
     }
 
