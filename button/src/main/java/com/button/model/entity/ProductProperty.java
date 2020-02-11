@@ -26,6 +26,7 @@ public class ProductProperty {
     private String units;
 
     public ProductProperty() {
+        quantity = 0.0f;
         state = false;
     }
 
