@@ -22,21 +22,26 @@
                         <th scope="col">Количество</th>
                         <th scope="col">Ед.изм.</th>
                         <th scope="col">Куплено</th>
+                        <th scope="col">Действия</th>
                     </tr>
                     </thead>
-                    <tbody>
                     <tr th:each="productProperty : ${listProducts}">
                         <td scope="row" th:text="${productProperty.id}"></td>
                         <td scope="row" th:text="${productProperty.product.name}"></td>
                         <td scope="row" th:text="${productProperty.quantity}"></td>
                         <td scope="row" th:text="${productProperty.units}"></td>
-                        <td scope="row" th:text="${productProperty.state}"></td>
+                        <td scope="row"><input type="checkbox" th:checked="${productProperty.state}" disabled></td>
+
+                        <td scopt="row">
+                            <a class="btn btn-success" th:href="@{/list_products/{listId}/edit/{productPropertyId} (listId=${list_id}, productPropertyId=${productProperty.id})}"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger" th:href="@{/list_products/{listId}/delete/{productPropertyId} (listId=${list_id}, productPropertyId=${productProperty.id})}"><i class="far fa-trash-alt"></i></a>
+                        </td>
                     </tr>
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
 </body>
 </html>

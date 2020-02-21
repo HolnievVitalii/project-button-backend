@@ -25,7 +25,10 @@ public class ProductProperty {
 
     private String units;
 
-    public ProductProperty() {}
+    public ProductProperty() {
+        quantity = 0.0f;
+        state = false;
+    }
 
     public Integer getId() {
         return id;

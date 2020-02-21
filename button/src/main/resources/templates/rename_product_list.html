@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extas/spring-security">
+
+<head th:replace="fragments/header::head_style"></head>
+<body>
+    <div th:replace="fragments/header::navbar"></div>
+
+    <div class="container">
+        <div class="row py-2">
+            <div class="col-12">
+                <a class="btn btn-primary" th:href="@{/}">Назад</a>
+            </div>
+
+            <div class="col-12">
+                <form th:action="@{/product_list/rename/{id} (id=${product_list.id})}" th:object="${product_list}" method="post">
+                    <div class="form-group">
+                        <label>Название списка</label>
+                        <input type="text" class="form-control" th:field="*{name}" placeholder="Введите новое название списка" autocomplete="off">
+                    </div>
+                    <button type="submit" class="btn btn-primary">OK</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
